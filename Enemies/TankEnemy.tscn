@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/TankEnemy.gd" type="Script" id=2]
+
+[node name="TankEnemy" instance=ExtResource( 1 )]
+position = Vector2( 0, 8 )
+script = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
+polygon = PoolVector2Array( -10, 0, 10, 0, 8, -16, 0, -19, -8, -16 )
+
+[node name="Polygon2D" type="Polygon2D" parent="." index="1"]
+color = Color( 0.121569, 0.580392, 0.278431, 1 )
+polygon = PoolVector2Array( -10, 0, -8, -16, 0, -19, 8, -16, 10, 0 )
+
+[node name="Right" type="RayCast2D" parent="." index="2"]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( 11, 0 )
+collision_mask = 2
+
+[node name="Left" type="RayCast2D" parent="." index="3"]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( -11, 0 )
+collision_mask = 2
+
+[node name="RightDown" type="RayCast2D" parent="." index="4"]
+position = Vector2( 8, -8 )
+enabled = true
+cast_to = Vector2( 0, 16 )
+collision_mask = 2
+
+[node name="LeftDown" type="RayCast2D" parent="." index="5"]
+position = Vector2( -8, -8 )
+enabled = true
+cast_to = Vector2( 0, 16 )
+collision_mask = 2
