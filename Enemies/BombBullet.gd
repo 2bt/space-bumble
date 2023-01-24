@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-const ACCEL := 300.0
-var vel := 70.0
+const ACCEL := 250.0
+var vel := 60.0
 
 func _physics_process(delta: float) -> void:
 	vel += delta * ACCEL

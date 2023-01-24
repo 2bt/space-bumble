@@ -15,8 +15,8 @@ func _physics_process(delta: float) -> void:
 	time += delta
 	if fire_enabled:
 		tick -= delta
-		if tick < 0:
-			tick = Global.random.randf_range(1, 4)
+		if tick < 0.0:
+			tick = Global.random.randf_range(1.5, 4.5)
 			var b = preload("res://Enemies/BombBullet.tscn").instance()
 			b.position = position + Vector2(dir * 5, 10)
 			Global.world.bullets.add_child(b)

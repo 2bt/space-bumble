@@ -97,14 +97,14 @@ func _physics_process(delta: float) -> void:
 		enemies.add_child(e)
 
 
-func _process(_delta: float) -> void:
-	$Shadow.material.set_shader_param("time", time)
-	$Shadow.material.set_shader_param("screen_size", Vector2(Global.W, Global.H))
-	$Shadow.material.set_shader_param("player_pos", $Player.position)
-	if $LightPlayer.visible:
-		$Shadow.material.set_shader_param("light_pos", $LightPlayer.position)
-	else:
-		$Shadow.material.set_shader_param("light_pos", Vector2(-1000, 0))
+#func _process(_delta: float) -> void:
+#	$Shadow.material.set_shader_param("time", time)
+#	$Shadow.material.set_shader_param("screen_size", Vector2(Global.W, Global.H))
+#	$Shadow.material.set_shader_param("player_pos", $Player.position)
+#	if $LightPlayer.visible:
+#		$Shadow.material.set_shader_param("light_pos", $LightPlayer.position)
+#	else:
+#		$Shadow.material.set_shader_param("light_pos", Vector2(-1000, 0))
 
 
 func _on_ViewArea_body_entered(body: Node) -> void:

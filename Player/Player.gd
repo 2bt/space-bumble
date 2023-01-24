@@ -32,9 +32,8 @@ func hit() -> void:
 	$HUD/FirePower.visible = false
 
 	# switch to main menu
-	#await get_tree().create_timer(2).timeout
-	yield(get_tree().create_timer(2), "timeout")
-	get_tree().change_scene_to(Global.MainMenu)
+	yield(get_tree().create_timer(1), "timeout")
+	SceneTransition.change_scene_to(Global.MainMenu)
 
 func _physics_process(delta):
 	if not visible: return

@@ -33,6 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Global/Global.gd"
+SceneTransition="*res://Global/SceneTransition.tscn"
 
 [display]
 
