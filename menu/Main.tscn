@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://menu/Main.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://b5fbq7kel536b" path="res://menu/Lixdu-p7Pn1.ttf" id="3"]
 
-[sub_resource type="Theme" id="Theme_tr75n"]
+[sub_resource type="Theme" id="Theme_xfnhi"]
 default_font = ExtResource("3")
 Label/colors/font_color = Color(0.87451, 0.34902, 0.34902, 1)
 
@@ -22,7 +22,7 @@ metadata/_edit_vertical_guides_ = [240.0]
 layout_mode = 0
 offset_right = 480.0
 offset_bottom = 160.0
-theme = SubResource("Theme_tr75n")
+theme = SubResource("Theme_xfnhi")
 theme_override_font_sizes/font_size = 46
 text = "Space
 Bumble"

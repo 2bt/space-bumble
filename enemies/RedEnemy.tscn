@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://d80l4rfmjbsj" path="res://enemies/Enemy.tscn" id="2"]
 
 [node name="RedEnemy" instance=ExtResource("2")]
-motion_mode = 1
 script = ExtResource("1")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]

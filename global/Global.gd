@@ -40,4 +40,3 @@ func _ready() -> void:
 	if FileAccess.file_exists(HIGHSCORES_PATH):
 		var f := FileAccess.open(HIGHSCORES_PATH, FileAccess.READ)
 		scores = JSON.parse_string(f.get_as_text())
-		print(scores)

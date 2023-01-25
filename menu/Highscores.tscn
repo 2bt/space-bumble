@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://cx4anytqpg533" path="res://menu/theme.tres" id="3"]
 [ext_resource type="LabelSettings" uid="uid://cfo7e1gvn6rok" path="res://menu/Scores.tres" id="4_iy30g"]
 
-[sub_resource type="FontFile" id="FontFile_e14bb"]
+[sub_resource type="FontFile" id="FontFile_oi7s3"]
 fallbacks = [ExtResource("2")]
 face_index = null
 embolden = null
@@ -25,8 +25,8 @@ cache/0/30/0/scale = 1.0
 cache/0/30/0/kerning_overrides/16/0 = Vector2(0, 0)
 cache/0/30/0/kerning_overrides/30/0 = Vector2(0, 0)
 
-[sub_resource type="Theme" id="Theme_otvdo"]
-default_font = SubResource("FontFile_e14bb")
+[sub_resource type="Theme" id="Theme_871fu"]
+default_font = SubResource("FontFile_oi7s3")
 Label/colors/font_color = Color(0.87451, 0.34902, 0.34902, 1)
 
 [node name="Highscores" type="Control"]
@@ -42,7 +42,7 @@ script = ExtResource("1")
 layout_mode = 0
 offset_right = 480.0
 offset_bottom = 64.0
-theme = SubResource("Theme_otvdo")
+theme = SubResource("Theme_871fu")
 theme_override_font_sizes/font_size = 30
 text = "Highscores"
 horizontal_alignment = 1
