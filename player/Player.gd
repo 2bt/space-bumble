@@ -23,15 +23,18 @@ func update_fire_power_bar() -> void:
 	$HUD/FirePower.size.y = floor(h * x)
 
 func hit() -> void:
+	if not visible:
+		return
 	Global.world.make_explosion(position)
-
 	$CollisionPolygon2D.disabled = true
 	visible = false
 	$HUD/FirePower.visible = false
 
-	# switch to main menu
 	await get_tree().create_timer(1).timeout
-	SceneTransition.change_scene_to_packed(Global.MainMenuScene)
+	if Global.add_new_score(score):
+		SceneTransition.change_scene_to_packed(Global.HighscoresScene)
+	else:
+		SceneTransition.change_scene_to_packed(Global.MainMenuScene)
 
 func _physics_process(delta):
 	if not visible: return
@@ -46,11 +49,16 @@ func _physics_process(delta):
 			hit()
 
 	# squised
-	if test_move(transform, Vector2.ZERO): hit()
+	if test_move(transform, Vector2.ZERO):
+		hit()
 
 	fire_tick += delta
 	fire_power = min(fire_power + delta, FIRE_POWER_MAX)
-	if Input.is_action_pressed("fire") and fire_tick >= FIRE_DELAY and fire_power >= FIRE_POWER_COST:
+	if (
+			Input.is_action_pressed("fire") and
+			fire_tick >= FIRE_DELAY and
+			fire_power >= FIRE_POWER_COST
+	):
 		fire_tick = 0
 		fire_power -= FIRE_POWER_COST
 		var b = preload("PlayerBullet.tscn").instantiate()

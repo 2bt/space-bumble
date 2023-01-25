@@ -32,6 +32,7 @@ func _physics_process(delta: float) -> void:
 
 	var front := $Right if dir == 1 else $Left
 	var down := $RightDown if dir == 1 else $LeftDown
+	var back_down := $LeftDown if dir == 1 else $RightDown
 
 	var speed := SPEED
 	if abs(rot - dst_rot) > 0.1:
@@ -39,7 +40,9 @@ func _physics_process(delta: float) -> void:
 		rotation_degrees = rot
 		speed *= 0.75
 	elif front.is_colliding(): dst_rot -= 90 * dir
-	elif not down.is_colliding(): dst_rot += 90 * dir
+	elif back_down.is_colliding() and not down.is_colliding(): dst_rot += 90 * dir
 
-	set_velocity(Vector2(dir * speed, speed).rotated(rotation) + Vector2(0, Global.world.SPEED))
+	set_velocity(
+			Vector2(dir * speed, speed * 0.5).rotated(rotation) +
+			Global.world.VEL)
 	move_and_slide()

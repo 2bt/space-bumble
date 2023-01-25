@@ -8,28 +8,22 @@ var tick := 0.0
 func _ready() -> void:
 	life = 2
 
+	rotation += Global.random.randf_range(-0.6, 0.6)
+
 	# find random position
-	var dir = Global.random.randi_range(0, 1)
+	var dir := Global.random.randi_range(0, 1)
 	if dir == 0: dir = -1
-	var space_state = get_world_2d().direct_space_state
-	var params = PhysicsRayQueryParameters2D.create(
+	var space_state := get_world_2d().direct_space_state
+	var params := PhysicsRayQueryParameters2D.create(
 		global_position,
 		global_position + Vector2(dir * 300.0, 0.0),
 		collision_mask)
-	var result = space_state.intersect_ray(params)
+	var result := space_state.intersect_ray(params)
 	if result:
 		global_position.x = Global.random.randf_range(global_position.x, result["position"].x)
 
-	rotation += Global.random.randf_range(-0.6, 0.6)
 	tick = Global.random.randf_range(0, 4)
 
-#func _process(delta: float) -> void:
-#	update()
-#func _draw() -> void:
-#	if $Left.is_colliding():
-#		draw_circle(to_local($Left.get_collision_point()), 5, Color(1, 0, 0, 1))
-#	if $Right.is_colliding():
-#		draw_circle(to_local($Right.get_collision_point()), 5, Color(0, 1, 0, 1))
 
 func _physics_process(delta: float) -> void:
 	tick += delta
@@ -44,5 +38,5 @@ func _physics_process(delta: float) -> void:
 	ang_vel = Global.step(rot, ang_vel, delta * 4.0)
 	rotation += ang_vel * delta
 
-	set_velocity(Vector2(0, Global.world.SPEED) + Vector2(0, SPEED).rotated(rotation))
+	set_velocity(Global.world.VEL + Vector2(0, SPEED).rotated(rotation))
 	move_and_slide()

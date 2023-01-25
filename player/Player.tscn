@@ -3,11 +3,12 @@
 [ext_resource type="Script" path="res://player/Player.gd" id="1_4ki8d"]
 [ext_resource type="Script" path="res://player/Joystick.gd" id="2_ox5y4"]
 [ext_resource type="Script" path="res://player/Button.gd" id="3_jk562"]
-[ext_resource type="Theme" path="res://menu/theme.tres" id="4_2rqrs"]
+[ext_resource type="Theme" uid="uid://cx4anytqpg533" path="res://menu/theme.tres" id="4_2rqrs"]
 
 [node name="Player" type="CharacterBody2D" groups=["players"]]
 collision_layer = 4
 collision_mask = 107
+motion_mode = 1
 script = ExtResource("1_4ki8d")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

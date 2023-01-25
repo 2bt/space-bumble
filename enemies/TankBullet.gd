@@ -9,8 +9,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var c = move_and_collide(
-		Vector2(0, -SPEED).rotated(rotation) * delta +
-		Vector2(0, Global.world.SPEED * delta))
+			Vector2(0, -SPEED).rotated(rotation) * delta +
+			Global.world.VEL * delta)
 	if not c: return
 	queue_free()
 	Global.world.make_explosion(c.get_position(), "small")

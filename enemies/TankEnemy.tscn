@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://bbv1st2436sr7"]
 
-[ext_resource type="PackedScene" path="res://enemies/Enemy.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://d80l4rfmjbsj" path="res://enemies/Enemy.tscn" id="1"]
 [ext_resource type="Script" path="res://enemies/TankEnemy.gd" id="2"]
 
 [node name="TankEnemy" instance=ExtResource("1")]
 position = Vector2(0, 8)
+motion_mode = 1
 script = ExtResource("2")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]

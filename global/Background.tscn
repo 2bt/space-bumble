@@ -21,10 +21,10 @@ orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 angle_max = 360.0
 scale_min = 0.1
-scale_max = 0.4
-color = Color(0.494118, 0.839216, 0.933333, 0.0784314)
-hue_variation_min = -0.1
-hue_variation_max = 0.1
+scale_max = 0.3
+color = Color(0.764706, 0.929412, 0.976471, 0.0784314)
+hue_variation_min = -0.05
+hue_variation_max = 0.05
 anim_offset_max = 1.0
 
 [node name="Background" type="CanvasLayer"]
@@ -44,4 +44,4 @@ process_material = SubResource("1")
 texture = ExtResource("1_yciys")
 lifetime = 30.0
 preprocess = 300.0
-speed_scale = 0.1
+speed_scale = 0.05

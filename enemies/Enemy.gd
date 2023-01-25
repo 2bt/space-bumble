@@ -1,5 +1,5 @@
-extends CharacterBody2D
 class_name Enemy
+extends CharacterBody2D
 
 var fire_enabled := false
 var life := 1

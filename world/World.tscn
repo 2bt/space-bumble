@@ -1,22 +1,22 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://dm15gororl6l4"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1"]
 [ext_resource type="PackedScene" path="res://player/LightPlayer.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://b1l0e1d7l8eo4" path="res://player/Player.tscn" id="3_dcoj1"]
+[ext_resource type="PackedScene" uid="uid://c416lsoakkiwf" path="res://player/Player.tscn" id="3_dcoj1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_25mbu"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmvfy"]
 size = Vector2(480, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oly5s"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42cm8"]
 size = Vector2(32, 270)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hdmfl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjp33"]
 size = Vector2(544, 334)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_datau"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8seo"]
 size = Vector2(479, 270)
 
-[sub_resource type="Shader" id="Shader_s5rrg"]
+[sub_resource type="Shader" id="Shader_60351"]
 code = "shader_type canvas_item;
 
 uniform vec2 screen_size;
@@ -40,8 +40,8 @@ void fragment() {
 	COLOR = vec4(0.0, 0.0, 0.0, clamp(d * 0.01, 0.0, 1.0));
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kh4ki"]
-shader = SubResource("Shader_s5rrg")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xki2w"]
+shader = SubResource("Shader_60351")
 shader_parameter/screen_size = null
 shader_parameter/player_pos = null
 shader_parameter/light_pos = null
@@ -50,6 +50,7 @@ shader_parameter/time = null
 [node name="World" type="Node2D"]
 script = ExtResource("1")
 metadata/_edit_vertical_guides_ = [240.0]
+metadata/_edit_horizontal_guides_ = [135.0]
 
 [node name="PlayerBoundary" type="StaticBody2D" parent="."]
 visible = false
@@ -57,19 +58,19 @@ collision_mask = 0
 
 [node name="Top" type="CollisionShape2D" parent="PlayerBoundary"]
 position = Vector2(240, -16)
-shape = SubResource("RectangleShape2D_25mbu")
+shape = SubResource("RectangleShape2D_vmvfy")
 
 [node name="Bottom" type="CollisionShape2D" parent="PlayerBoundary"]
 position = Vector2(240, 286)
-shape = SubResource("RectangleShape2D_25mbu")
+shape = SubResource("RectangleShape2D_vmvfy")
 
 [node name="Right" type="CollisionShape2D" parent="PlayerBoundary"]
 position = Vector2(496, 135)
-shape = SubResource("RectangleShape2D_oly5s")
+shape = SubResource("RectangleShape2D_42cm8")
 
 [node name="Left" type="CollisionShape2D" parent="PlayerBoundary"]
 position = Vector2(-16, 135)
-shape = SubResource("RectangleShape2D_oly5s")
+shape = SubResource("RectangleShape2D_42cm8")
 
 [node name="PaddedViewArea" type="Area2D" parent="."]
 visible = false
@@ -78,7 +79,7 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PaddedViewArea"]
 position = Vector2(240, 135)
-shape = SubResource("RectangleShape2D_hdmfl")
+shape = SubResource("RectangleShape2D_gjp33")
 
 [node name="ViewArea" type="Area2D" parent="."]
 visible = false
@@ -87,7 +88,7 @@ collision_mask = 56
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
 position = Vector2(239.5, 135)
-shape = SubResource("RectangleShape2D_datau")
+shape = SubResource("RectangleShape2D_a8seo")
 
 [node name="Bullets" type="Node2D" parent="."]
 
@@ -97,23 +98,32 @@ shape = SubResource("RectangleShape2D_datau")
 visible = false
 position = Vector2(240, 125)
 
+[node name="Player" parent="." instance=ExtResource("3_dcoj1")]
+position = Vector2(240, 216)
+
 [node name="Particles" type="Node2D" parent="."]
 
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="Shadow" type="ColorRect" parent="."]
 visible = false
-material = SubResource("ShaderMaterial_kh4ki")
+material = SubResource("ShaderMaterial_xki2w")
 offset_right = 480.0
 offset_bottom = 270.0
 color = Color(0.137255, 0.101961, 0.101961, 0.862745)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(240, 135)
 zoom = Vector2(0.5, 0.5)
 
-[node name="Player" parent="." instance=ExtResource("3_dcoj1")]
-position = Vector2(240, 216)
+[node name="ReferenceRect" type="ReferenceRect" parent="Camera2D"]
+offset_left = -240.0
+offset_top = -135.0
+offset_right = 240.0
+offset_bottom = 135.0
+border_color = Color(1, 1, 1, 1)
+editor_only = false
 
 [connection signal="body_exited" from="PaddedViewArea" to="." method="_on_PaddedViewArea_body_exited"]
 [connection signal="body_entered" from="ViewArea" to="." method="_on_ViewArea_body_entered"]

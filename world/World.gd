@@ -1,6 +1,7 @@
 extends Node2D
 
 const SPEED := 15.0
+const VEL := Vector2(0.0, SPEED)
 const MARGIN_Y := 100
 
 @onready var walls := $Walls
@@ -30,7 +31,9 @@ class WallSet:
 		# add new walls
 		while offset > 0:
 			var maxw = min(5, tick / 100)
-			var w = 1 + Global.random.randi_range(0, maxw) + Global.random.randi_range(0, maxw - 3)
+			var w = 1
+			w += Global.random.randi_range(0, maxw)
+			w += Global.random.randi_range(0, maxw - 3)
 			var w_diff = abs(prev_w - w)
 			prev_w = w
 			var h = Global.random.randi_range(1, 6)
@@ -50,7 +53,7 @@ class WallSet:
 var left_wall := WallSet.new(false)
 var right_wall := WallSet.new(true)
 
-var enemy_scenes := []
+var enemy_scenes: Array[PackedScene] = []
 var enemy_weights := [0.0]
 
 func add_enemy_scene(weight: float, scene: PackedScene) -> void:
@@ -67,10 +70,8 @@ func _ready() -> void:
 	right_wall.scroll(Global.H + MARGIN_Y)
 
 
-var tick := 0.0
 var time := 0.0
-
-
+var tick := -2.0 # wait before first spawn
 
 func _physics_process(delta: float) -> void:
 	left_wall.scroll(delta * SPEED)
@@ -87,18 +88,19 @@ func _physics_process(delta: float) -> void:
 		var w: float = Global.random.randf_range(0, enemy_weights[-1])
 		var i := enemy_weights.bsearch(w) - 1
 		var e = enemy_scenes[i].instantiate()
-		e.init(Vector2(Global.W * 0.5, Global.random.randf_range(-50.0, -30.0)))
+		e.init(Vector2(Global.W * 0.5, -40.0))
 		enemies.add_child(e)
 
 
-#func _process(_delta: float) -> void:
-#	$Shadow.material.set_shader_parameter("time", time)
-#	$Shadow.material.set_shader_parameter("screen_size", Vector2(Global.W, Global.H))
-#	$Shadow.material.set_shader_parameter("player_pos", $Player.position)
-#	if $LightPlayer.visible:
-#		$Shadow.material.set_shader_parameter("light_pos", $LightPlayer.position)
-#	else:
-#		$Shadow.material.set_shader_parameter("light_pos", Vector2(-1000, 0))
+func _process(_delta: float) -> void:
+	if $Shadow.visible:
+		$Shadow.material.set_shader_parameter("time", time)
+		$Shadow.material.set_shader_parameter("screen_size", Vector2(Global.W, Global.H))
+		$Shadow.material.set_shader_parameter("player_pos", $Player.position)
+		if $LightPlayer.visible:
+			$Shadow.material.set_shader_parameter("light_pos", $LightPlayer.position)
+		else:
+			$Shadow.material.set_shader_parameter("light_pos", Vector2(-1000, 0))
 
 
 func _on_ViewArea_body_entered(body: Node) -> void:

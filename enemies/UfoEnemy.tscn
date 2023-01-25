@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://cq5usco4vyrin"]
 
-[ext_resource type="PackedScene" path="res://enemies/Enemy.tscn" id="1_itt3k"]
+[ext_resource type="PackedScene" uid="uid://d80l4rfmjbsj" path="res://enemies/Enemy.tscn" id="1_itt3k"]
 [ext_resource type="Script" path="res://enemies/UfoEnemy.gd" id="2_1eu58"]
 
 [node name="UfoEnemy" instance=ExtResource("1_itt3k")]
+motion_mode = 1
 script = ExtResource("2_1eu58")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
