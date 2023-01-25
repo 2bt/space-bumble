@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://world/World.gd" id="1"]
+[ext_resource type="PackedScene" path="res://player/LightPlayer.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://b1l0e1d7l8eo4" path="res://player/Player.tscn" id="3_dcoj1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_25mbu"]
+size = Vector2(480, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oly5s"]
+size = Vector2(32, 270)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hdmfl"]
+size = Vector2(544, 334)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_datau"]
+size = Vector2(479, 270)
+
+[sub_resource type="Shader" id="Shader_s5rrg"]
+code = "shader_type canvas_item;
+
+uniform vec2 screen_size;
+uniform vec2 player_pos;
+uniform vec2 light_pos;
+uniform float time;
+
+float opSmoothUnion(float d1, float d2, float k) {
+    float h = max(k - abs(d1 - d2), 0.0);
+    return min(d1, d2) - h * h * 0.25 / k;
+}
+
+void fragment() {
+	vec2 p = UV.xy * screen_size;
+	float d1 = distance(light_pos, p) - 130.0;
+	float d2 = distance(player_pos, p) - 20.0;
+	float d = opSmoothUnion(d1, d2, 30.0);
+	d += sin(time * 20.0) * 2.0;
+	d -= max(0.0, 1000.0 - time * 300.0);
+
+	COLOR = vec4(0.0, 0.0, 0.0, clamp(d * 0.01, 0.0, 1.0));
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kh4ki"]
+shader = SubResource("Shader_s5rrg")
+shader_parameter/screen_size = null
+shader_parameter/player_pos = null
+shader_parameter/light_pos = null
+shader_parameter/time = null
+
+[node name="World" type="Node2D"]
+script = ExtResource("1")
+metadata/_edit_vertical_guides_ = [240.0]
+
+[node name="PlayerBoundary" type="StaticBody2D" parent="."]
+visible = false
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="PlayerBoundary"]
+position = Vector2(240, -16)
+shape = SubResource("RectangleShape2D_25mbu")
+
+[node name="Bottom" type="CollisionShape2D" parent="PlayerBoundary"]
+position = Vector2(240, 286)
+shape = SubResource("RectangleShape2D_25mbu")
+
+[node name="Right" type="CollisionShape2D" parent="PlayerBoundary"]
+position = Vector2(496, 135)
+shape = SubResource("RectangleShape2D_oly5s")
+
+[node name="Left" type="CollisionShape2D" parent="PlayerBoundary"]
+position = Vector2(-16, 135)
+shape = SubResource("RectangleShape2D_oly5s")
+
+[node name="PaddedViewArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PaddedViewArea"]
+position = Vector2(240, 135)
+shape = SubResource("RectangleShape2D_hdmfl")
+
+[node name="ViewArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 56
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewArea"]
+position = Vector2(239.5, 135)
+shape = SubResource("RectangleShape2D_datau")
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="LightPlayer" parent="." instance=ExtResource("3")]
+visible = false
+position = Vector2(240, 125)
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Shadow" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_kh4ki")
+offset_right = 480.0
+offset_bottom = 270.0
+color = Color(0.137255, 0.101961, 0.101961, 0.862745)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(240, 135)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Player" parent="." instance=ExtResource("3_dcoj1")]
+position = Vector2(240, 216)
+
+[connection signal="body_exited" from="PaddedViewArea" to="." method="_on_PaddedViewArea_body_exited"]
+[connection signal="body_entered" from="ViewArea" to="." method="_on_ViewArea_body_entered"]
+[connection signal="body_exited" from="ViewArea" to="." method="_on_ViewArea_body_exited"]

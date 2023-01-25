@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://c416lsoakkiwf"]
+
+[ext_resource type="Script" path="res://player/Player.gd" id="1_4ki8d"]
+[ext_resource type="Script" path="res://player/Joystick.gd" id="2_ox5y4"]
+[ext_resource type="Script" path="res://player/Button.gd" id="3_jk562"]
+[ext_resource type="Theme" path="res://menu/theme.tres" id="4_2rqrs"]
+
+[node name="Player" type="CharacterBody2D" groups=["players"]]
+collision_layer = 4
+collision_mask = 107
+script = ExtResource("1_4ki8d")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -16)
+polygon = PackedVector2Array(0, 3, 9, 16, 12, 26, -12, 26, -9, 16)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(0, -16)
+color = Color(0.772549, 0.85098, 1, 1)
+polygon = PackedVector2Array(12, 26, 0, 24, -12, 26, -9, 16, 0, 3, 9, 16)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Joystick" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 192.0
+offset_bottom = 270.0
+script = ExtResource("2_ox5y4")
+
+[node name="MoveRect" type="ColorRect" parent="HUD/Joystick"]
+visible = false
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+color = Color(1, 1, 1, 0.290196)
+
+[node name="Button" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 288.0
+offset_right = 480.0
+offset_bottom = 272.0
+script = ExtResource("3_jk562")
+
+[node name="FirePowerBG" type="ColorRect" parent="HUD"]
+offset_left = 469.0
+offset_top = 20.0
+offset_right = 474.0
+offset_bottom = 135.0
+color = Color(1, 1, 1, 0.196078)
+
+[node name="FirePower" type="ColorRect" parent="HUD"]
+offset_left = 469.0
+offset_top = 20.0
+offset_right = 474.0
+offset_bottom = 135.0
+color = Color(1, 1, 0.533333, 1)
+
+[node name="Score" type="Label" parent="HUD"]
+offset_left = 286.0
+offset_top = 5.0
+offset_right = 474.0
+offset_bottom = 18.0
+theme = ExtResource("4_2rqrs")
+theme_override_font_sizes/font_size = 10
+text = "0"
+horizontal_alignment = 2

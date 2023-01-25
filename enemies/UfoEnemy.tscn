@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq5usco4vyrin"]
+
+[ext_resource type="PackedScene" path="res://enemies/Enemy.tscn" id="1_itt3k"]
+[ext_resource type="Script" path="res://enemies/UfoEnemy.gd" id="2_1eu58"]
+
+[node name="UfoEnemy" instance=ExtResource("1_itt3k")]
+script = ExtResource("2_1eu58")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
+polygon = PackedVector2Array(7, -10, -7, -10, -21, 0, -8, 10, 8, 10, 21, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="." index="1"]
+position = Vector2(0, -4)
+color = Color(0.513726, 0.384314, 0.254902, 1)
+polygon = PackedVector2Array(21, 4, 8, 14, -8, 14, -21, 4, -13, 0, -7, -6, 7, -6, 13, 0)

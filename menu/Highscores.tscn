@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://menu/Highscores.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://b5fbq7kel536b" path="res://menu/Lixdu-p7Pn1.ttf" id="2"]
+[ext_resource type="Theme" uid="uid://dma1swr3vbw0o" path="res://menu/theme.tres" id="3"]
+
+[sub_resource type="FontFile" id="FontFile_adcyt"]
+fallbacks = [ExtResource("2")]
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/30/0/ascent = 0.0
+cache/0/30/0/descent = 0.0
+cache/0/30/0/underline_position = 0.0
+cache/0/30/0/underline_thickness = 0.0
+cache/0/30/0/scale = 1.0
+cache/0/30/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/30/0 = Vector2(0, 0)
+
+[sub_resource type="Theme" id="Theme_piio4"]
+default_font = SubResource("FontFile_adcyt")
+Label/colors/font_color = Color(0.87451, 0.34902, 0.34902, 1)
+
+[node name="Highscores" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 64.0
+theme = SubResource("Theme_piio4")
+theme_override_font_sizes/font_size = 30
+text = "Highscores"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Numbers" type="Label" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 152.0
+offset_bottom = 270.0
+theme = ExtResource("3")
+text = "1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10."
+horizontal_alignment = 2
+
+[node name="Scores" type="Label" parent="."]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 352.0
+offset_bottom = 270.0
+theme = ExtResource("3")
+text = "134124
+23245
+233
+100
+40
+0
+0
+0
+0
+0"
+horizontal_alignment = 2
