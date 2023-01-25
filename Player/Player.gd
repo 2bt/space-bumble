@@ -33,7 +33,7 @@ func hit() -> void:
 
 	# switch to main menu
 	yield(get_tree().create_timer(1), "timeout")
-	SceneTransition.change_scene_to(Global.MainMenu)
+	SceneTransition.change_scene_to(Global.MainMenuScene)
 
 func _physics_process(delta):
 	if not visible: return

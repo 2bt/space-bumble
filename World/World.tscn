@@ -53,11 +53,6 @@ __meta__ = {
 "_edit_vertical_guides_": [ 240.0 ]
 }
 
-[node name="Background" type="ColorRect" parent="."]
-margin_right = 480.0
-margin_bottom = 270.0
-color = Color( 0.0470588, 0.0588235, 0.152941, 1 )
-
 [node name="PlayerBoundary" type="StaticBody2D" parent="."]
 visible = false
 collision_mask = 0

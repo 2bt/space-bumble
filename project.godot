@@ -34,6 +34,7 @@ config/icon="res://icon.png"
 
 Global="*res://Global/Global.gd"
 SceneTransition="*res://Global/SceneTransition.tscn"
+Background="*res://Global/Background.tscn"
 
 [display]
 

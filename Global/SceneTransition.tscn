@@ -17,13 +17,13 @@ void fragment() {
 		b += 1.0;
 		b = b * 2.0 - 1.0;
 		float r = fract(b + UV.y * 5.0 + UV.x);
-		b = r + b > UV.y ? 1.0 : 0.0;
+		b = r + b >= UV.y ? 1.0 : 0.0;
 	}
 	else {
 		b = 1.0 - b;
 		b = b * 2.0 - 1.0;
 		float r = fract(b + UV.x * 8.0 + UV.y);
-		b = r + b > UV.x ? 1.0 : 0.0;
+		b = r + b >= UV.x ? 1.0 : 0.0;
 	}
 	COLOR = vec4(0.0, 0.0, 0.0, b);
 }"
@@ -42,7 +42,5 @@ process_priority = 10
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1.0
-margin_right = -1.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 0 )
